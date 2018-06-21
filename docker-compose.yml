@@ -1,16 +1,23 @@
 version: '2'
 services:
-  leeroyapp:
-    build: ./leeroy-app
-    image: jamorin/leeroy-app
+  leeroy:
+    image: jamorin/leeroy-java-microservice
     environment:
-    - "API_MESSAGE=what it do"
-  leeroyweb:
-    build: ./leeroy-web
-    image: jamorin/leeroy-web
-    depends_on:
-    - leeroyapp
-    environment:
-    - "API_URL=http://leeroyapp:50051/leeroyapp/myendpoint"
+    - "SPRING_APPLICATION_NAME=leeroy"
+    - "SERVER_SERVLET_CONTEXT_PATH=/leeroy"
     ports:
-    - "8080:8080"
+    - "8081:8080"
+  jenkins:
+    image: jamorin/leeroy-java-microservice
+    environment:
+    - "SPRING_APPLICATION_NAME=jenkins"
+    - "SERVER_SERVLET_CONTEXT_PATH=/jenkins"
+    ports:
+    - "8082:8080"
+  foobar:
+    image: jamorin/leeroy-java-microservice
+    environment:
+    - "SPRING_APPLICATION_NAME=foobar"
+    - "SERVER_SERVLET_CONTEXT_PATH=/foobar"
+    ports:
+    - "8083:8080"
