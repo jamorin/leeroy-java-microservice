@@ -1,0 +1,16 @@
+version: '2'
+services:
+  leeroyapp:
+    build: ./leeroy-app
+    image: jamorin/leeroy-app
+    environment:
+    - "API_MESSAGE=what it do"
+  leeroyweb:
+    build: ./leeroy-web
+    image: jamorin/leeroy-web
+    depends_on:
+    - leeroyapp
+    environment:
+    - "API_URL=http://leeroyapp:50051/leeroyapp/myendpoint"
+    ports:
+    - "8080:8080"
